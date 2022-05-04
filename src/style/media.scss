@@ -1,0 +1,140 @@
+@media (min-width: calc($width-xl + 1px)) {
+	.container {
+		>*>*:not(.separator) {
+			// background-color: red;
+		}
+	}
+
+	.container {
+		>*>*:not(.separator) {
+			width: calc(100vw - 300px);
+		}
+	}
+}
+
+@media (max-width: $width-xl) {
+	.container {
+		>*>*:not(.separator) {
+			// background-color: orange;
+		}
+	}
+
+	.container {
+		>*>*:not(.separator) {
+			width: 80vw;
+		}
+	}
+}
+
+@media (max-width: $width-l) {
+	.container {
+		>*>*:not(.separator) {
+			// background-color: yellow;
+		}
+	}
+
+	.container {
+		>*>*:not(.separator) {
+			width: $width-l - 200px;
+		}
+	}
+
+	.form {
+		&__files-to-upload {
+			font-size: 0.7rem;
+		}
+	}
+}
+
+@media (max-width: $width-m) {
+	.container {
+		>*>*:not(.separator) {
+			// background-color: green;
+		}
+	}
+
+	.container {
+		>*>*:not(.separator) {
+			width: 100vw;
+		}
+	}
+
+	.header {
+		height: auto;
+
+		.logo {
+			display: none;
+
+			&__wrapper {
+				display: none;
+				margin: 0;
+			}
+		}
+	}
+
+	.queue {
+		&__single-input {
+			max-width: none;
+		}
+	}
+}
+
+@media (max-width: $width-s) {
+	.container {
+		>*>*:not(.separator) {
+			// background-color: cyan;
+		}
+	}
+
+	.container {
+		>*>*:not(.separator) {
+			width: 100vw;
+		}
+	}
+
+	.navigation {
+		&__item {
+			padding: 12px;
+		}
+	}
+
+	.queue {
+
+		.table {
+			&__cell:nth-child(3) {
+				width: 15%;
+			}
+		}
+	}
+
+	.form {
+		&__files-to-upload {
+			font-size: 0.9rem;
+		}
+	}
+
+	html {
+		font-size: 12px;
+	}
+}
+
+@media (max-width: $width-xs) {
+	.container {
+		>*>*:not(.separator) {
+			// background-color: blue;
+		}
+	}
+
+	.navigation {
+		&__container {
+			flex-direction: column;
+			align-items: center;
+		}
+	}
+
+	.menu {
+		.button {
+			flex: 1 1;
+		}
+	}
+}
