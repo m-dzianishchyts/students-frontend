@@ -1,0 +1,14 @@
+@import "../../style/constants.scss";
+
+.archive {
+	display: flex;
+	flex-direction: column;
+	flex: 1 0;
+	height: 0;
+
+	&__container {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+	}
+}

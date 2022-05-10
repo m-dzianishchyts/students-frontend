@@ -24,7 +24,12 @@ body {
 	flex-direction: column;
 	flex: 1 0;
 
-	>*>*:not(.separator) {
+	>app-main {
+		display: flex;
+		flex: 1 1;
+	}
+
+	>*:not(.separator) {
 		margin: 0px auto;
 		padding-left: 15px;
 		padding-right: 15px;
@@ -58,30 +63,4 @@ body {
 	border: 1px solid darken($background-color, 10%);
 	border-radius: 5px;
 	padding: 5px;
-}
-
-.main {
-	display: flex;
-	flex-direction: column;
-	padding-top: 20px;
-	padding-bottom: 20px;
-	flex: 1 0;
-	height: 0;
-
-	&__title {
-		font-weight: bold;
-		margin-bottom: 20px;
-	}
-}
-
-.title {
-
-	&__header {
-		font-weight: inherit;
-		font-size: 1.4rem;
-	}
-
-	&__subheader {
-		font-size: 1.2rem;
-	}
 }

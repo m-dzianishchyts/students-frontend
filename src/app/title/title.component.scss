@@ -1,0 +1,13 @@
+.title {
+	font-weight: bold;
+	margin-bottom: 20px;
+
+	&__header {
+		font-weight: inherit;
+		font-size: 1.4rem;
+	}
+
+	&__subheader {
+		font-size: 1.2rem;
+	}
+}

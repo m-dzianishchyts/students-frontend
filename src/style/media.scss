@@ -1,12 +1,12 @@
 @media (min-width: calc($width-xl + 1px)) {
 	.container {
-		>*>*:not(.separator) {
+		>*:not(.separator) {
 			// background-color: red;
 		}
 	}
 
 	.container {
-		>*>*:not(.separator) {
+		>*:not(.separator) {
 			width: calc(100vw - 300px);
 		}
 	}
@@ -14,13 +14,13 @@
 
 @media (max-width: $width-xl) {
 	.container {
-		>*>*:not(.separator) {
+		>*:not(.separator) {
 			// background-color: orange;
 		}
 	}
 
 	.container {
-		>*>*:not(.separator) {
+		>*:not(.separator) {
 			width: 80vw;
 		}
 	}
@@ -28,13 +28,13 @@
 
 @media (max-width: $width-l) {
 	.container {
-		>*>*:not(.separator) {
+		>*:not(.separator) {
 			// background-color: yellow;
 		}
 	}
 
 	.container {
-		>*>*:not(.separator) {
+		>*:not(.separator) {
 			width: $width-l - 200px;
 		}
 	}
@@ -48,13 +48,13 @@
 
 @media (max-width: $width-m) {
 	.container {
-		>*>*:not(.separator) {
+		>*:not(.separator) {
 			// background-color: green;
 		}
 	}
 
 	.container {
-		>*>*:not(.separator) {
+		>*:not(.separator) {
 			width: 100vw;
 		}
 	}
@@ -81,13 +81,13 @@
 
 @media (max-width: $width-s) {
 	.container {
-		>*>*:not(.separator) {
+		>*:not(.separator) {
 			// background-color: cyan;
 		}
 	}
 
 	.container {
-		>*>*:not(.separator) {
+		>*:not(.separator) {
 			width: 100vw;
 		}
 	}
@@ -120,7 +120,7 @@
 
 @media (max-width: $width-xs) {
 	.container {
-		>*>*:not(.separator) {
+		>*:not(.separator) {
 			// background-color: blue;
 		}
 	}
