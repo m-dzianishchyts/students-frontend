@@ -1,84 +1,84 @@
 @font-face {
-	font-family: 'icofont';
-	src: url('../assets/fonts/icofont.woff') format('woff'), url('../assets/fonts/icofont.woff2') format('woff2');
-	font-weight: normal;
-	font-style: normal;
-	font-display: block;
+    font-family: 'icofont';
+    src: url('../assets/fonts/icofont.woff') format('woff'), url('../assets/fonts/icofont.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
 }
 
 .icon {
-	font-family: 'icofont' !important;
-	speak: never;
-	font-style: normal;
-	font-weight: normal;
-	font-variant: normal;
-	text-transform: none;
-	line-height: 1;
+    font-family: 'icofont' !important;
+    speak: never;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
 
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 .icon-trash:before {
-	content: "\e90f";
+    content: "\e90f";
 }
 
 .icon-time:before {
-	content: "\e90b";
+    content: "\e90b";
 }
 
 .icon-close:before {
-	content: "\e900";
+    content: "\e900";
 }
 
 .icon-checkmark:before {
-	content: "\e901";
+    content: "\e901";
 }
 
 .icon-github:before {
-	content: "\e90e";
+    content: "\e90e";
 }
 
 .icon-linkedin:before {
-	content: "\e90d";
+    content: "\e90d";
 }
 
 .icon-file:before {
-	content: "\e902";
+    content: "\e902";
 }
 
 .icon-file-archive:before {
-	content: "\e903";
+    content: "\e903";
 }
 
 .icon-file-image:before {
-	content: "\e904";
+    content: "\e904";
 }
 
 .icon-file-video:before {
-	content: "\e905";
+    content: "\e905";
 }
 
 .icon-file-audio:before {
-	content: "\e906";
+    content: "\e906";
 }
 
 .icon-file-word:before {
-	content: "\e907";
+    content: "\e907";
 }
 
 .icon-file-excel:before {
-	content: "\e908";
+    content: "\e908";
 }
 
 .icon-file-pdf:before {
-	content: "\e909";
+    content: "\e909";
 }
 
 .icon-file-openoffice:before {
-	content: "\e90a";
+    content: "\e90a";
 }
 
 .icon-email:before {
-	content: "\e90c";
+    content: "\e90c";
 }

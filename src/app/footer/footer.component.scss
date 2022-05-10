@@ -1,47 +1,47 @@
 @import "../../style/constants.scss";
 
 .footer {
-	padding-top: 15px;
-	padding-bottom: 15px;
-	flex: 0 0 auto;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    flex: 0 0 auto;
 
-	&__social {
-		display: flex;
-		justify-content: center;
-		text-align: center;
-		gap: 15px;
-		margin-bottom: 15px;
-		color: lighten($base-color, 10%);
-	}
+    &__social {
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        gap: 15px;
+        margin-bottom: 15px;
+        color: lighten($base-color, 10%);
+    }
 
-	&__copyright {
-		text-align: center;
-		color: $light-color;
-	}
+    &__copyright {
+        text-align: center;
+        color: $light-color;
+    }
 }
 
 .social {
 
-	&__item {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		flex: 0 0 40px;
-		width: 40px;
-		height: 40px;
-		font-size: 24px;
-		line-height: 43px;
-		border-radius: 50%;
-		border: 1px solid $light-color;
-		color: inherit;
-		opacity: 0.7;
-		transition: 0.3s;
+    &__item {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex: 0 0 40px;
+        width: 40px;
+        height: 40px;
+        font-size: 24px;
+        line-height: 43px;
+        border-radius: 50%;
+        border: 1px solid $light-color;
+        color: inherit;
+        opacity: 0.7;
+        transition: 0.3s;
 
-		&:hover,
-		&:focus {
-			color: $primary-color;
-			opacity: 1;
-			background-color: lighten($background-color, 10%);
-		}
-	}
+        &:hover,
+        &:focus {
+            color: $primary-color;
+            opacity: 1;
+            background-color: lighten($background-color, 10%);
+        }
+    }
 }

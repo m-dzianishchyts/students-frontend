@@ -1,70 +1,70 @@
 @import "../../style/constants.scss";
 
 .file {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	gap: 20px;
-	padding: 10px;
-	border-radius: 5px;
-	background-color: darken($background-color, 4%);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: darken($background-color, 4%);
 
-	&__time {
-		font-size: 0.8rem;
-		color: $light-color;
-	}
+    &__time {
+        font-size: 0.8rem;
+        color: $light-color;
+    }
 
-	&__info {
-		display: flex;
-		flex: 1 1;
-		gap: 10px;
-	}
+    &__info {
+        display: flex;
+        flex: 1 1;
+        gap: 10px;
+    }
 
-	&__name-and-size {
-		display: flex;
-		flex-direction: column;
-	}
+    &__name-and-size {
+        display: flex;
+        flex-direction: column;
+    }
 
-	&__name {
-		font-weight: bold;
-		color: $primary-color;
-		transition: color 0.3s;
+    &__name {
+        font-weight: bold;
+        color: $primary-color;
+        transition: color 0.3s;
 
-		&:hover,
-		&:focus,
-		&:visited {
-			color: $base-color;
-		}
-	}
+        &:hover,
+        &:focus,
+        &:visited {
+            color: $base-color;
+        }
+    }
 
-	&__icon {
-		font-size: 30px;
-	}
+    &__icon {
+        font-size: 30px;
+    }
 
 
-	&__size {
-		font-size: 0.8rem;
-		color: $light-color;
-	}
+    &__size {
+        font-size: 0.8rem;
+        color: $light-color;
+    }
 
-	&__controls {
-		display: flex;
-		align-items: center;
-		gap: 5px;
-		color: lighten($base-color, 10%);
+    &__controls {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        color: lighten($base-color, 10%);
 
-		&>button {
-			background-color: inherit;
-			color: inherit;
-			opacity: 0.6;
-			transition: 0.3s;
+        & > button {
+            background-color: inherit;
+            color: inherit;
+            opacity: 0.6;
+            transition: 0.3s;
 
-			&:hover,
-			&:focus {
-				opacity: 1;
-			}
-		}
-	}
+            &:hover,
+            &:focus {
+                opacity: 1;
+            }
+        }
+    }
 
-	&__remove {}
+    &__remove {}
 }

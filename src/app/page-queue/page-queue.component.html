@@ -1,82 +1,132 @@
 <app-title></app-title>
 <div class="queue__container">
-	<div class="queue">
-		<div class="queue__menu--top menu">
-			<div class="menu__container">
-				<form method="get" id="shuffle-rotate">
-					<input type="hidden" name="queueId" value="123" form="shuffle-rotate" />
-					<button type="submit" name="action" value="shuffle" class="menu__item queue__shuffle button">
-						Shuffle
-					</button>
-					<button type="submit" name="action" value="rotate" class="menu__item queue__rotate button">
-						Rotate
-					</button>
-				</form>
-			</div>
-		</div>
-		<form method="get" id="person1">
-			<input type="hidden" name="queueId" value="123" form="person1" />
-			<input type="hidden" name="id" value="abc123" form="person1" />
-		</form>
-		<form method="get" id="person2">
-			<input type="hidden" name="queueId" value="123" form="person2" />
-			<input type="hidden" name="id" value="abc123" form="person2" />
-		</form>
-		<form method="post" id="new-person">
-			<input type="hidden" name="queueId" value="123" form="new-person" />
-		</form>
-		<table class="queue__table table">
-			<thead class="table__head">
-				<tr class="table__row">
-					<th class="table__th table__cell">#</th>
-					<th class="table__th table__cell">Name</th>
-					<th class="table__th table__cell">Status</th>
-					<th class="table__th table__cell"></th>
-				</tr>
-			</thead>
-			<tbody class="table__body">
-				<tr class="table__row">
-					<td class="table__td table__cell">1</td>
-					<td class="table__td table__cell">Person A</td>
-					<td class="table__td table__cell">
-						<span class="table__controls">
-							<button type="submit" name="action" value="toggleStatus" class="queue__status icon icon-time" form="person1"></button>
-						</span>
-					</td>
-					<td class="table__td table__cell">
-						<span class="table__controls">
-							<button type="submit" name="action" value="remove" class="queue__remove icon icon-trash" form="person1"></button>
-						</span>
-					</td>
-				</tr>
-				<tr class="table__row">
-					<td class="table__td table__cell">2</td>
-					<td class="table__td table__cell">Person B</td>
-					<td class="table__td table__cell">
-						<span class="table__controls">
-							<button type="submit" name="action" value="toggleStatus" form="person2" class="queue__status icon icon-checkmark"></button>
-						</span>
-					</td>
-					<td class="table__td table__cell">
-						<span class="table__controls">
-							<button type="submit" name="action" value="remove" class="queue__remove icon icon-trash" form="person2"></button>
-						</span>
-					</td>
-				</tr>
-				<tr class="table__row">
-					<td class="table__td table__cell"></td>
-					<td class="table__td table__cell">
-						<span class="queue__single-input">
-							<input name="person-name" type="text" class="queue__text-input input" form="new_person" />
-							<button type="submit" name="action" value="add" class="queue__add button" form="new_person">
-								Add
-							</button>
-						</span>
-					</td>
-					<td class="table__td table__cell"></td>
-					<td class="table__td table__cell"></td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
+  <div class="queue">
+    <div class="queue__menu--top menu">
+      <div class="menu__container">
+        <form method="get" id="shuffle-rotate">
+          <input
+            type="hidden"
+            name="queueId"
+            value="123"
+            form="shuffle-rotate"
+          />
+          <button
+            type="submit"
+            name="action"
+            value="shuffle"
+            class="menu__item queue__shuffle button"
+          >
+            Shuffle
+          </button>
+          <button
+            type="submit"
+            name="action"
+            value="rotate"
+            class="menu__item queue__rotate button"
+          >
+            Rotate
+          </button>
+        </form>
+      </div>
+    </div>
+    <form method="get" id="person1">
+      <input type="hidden" name="queueId" value="123" form="person1" />
+      <input type="hidden" name="id" value="abc123" form="person1" />
+    </form>
+    <form method="get" id="person2">
+      <input type="hidden" name="queueId" value="123" form="person2" />
+      <input type="hidden" name="id" value="abc123" form="person2" />
+    </form>
+    <form method="post" id="new-person">
+      <input type="hidden" name="queueId" value="123" form="new-person" />
+    </form>
+    <table class="queue__table table">
+      <thead class="table__head">
+        <tr class="table__row">
+          <th class="table__th table__cell">#</th>
+          <th class="table__th table__cell">Name</th>
+          <th class="table__th table__cell">Status</th>
+          <th class="table__th table__cell"></th>
+        </tr>
+      </thead>
+      <tbody class="table__body">
+        <tr class="table__row">
+          <td class="table__td table__cell">1</td>
+          <td class="table__td table__cell">Person A</td>
+          <td class="table__td table__cell">
+            <span class="table__controls">
+              <button
+                type="submit"
+                name="action"
+                value="toggleStatus"
+                class="queue__status icon icon-time"
+                form="person1"
+              ></button>
+            </span>
+          </td>
+          <td class="table__td table__cell">
+            <span class="table__controls">
+              <button
+                type="submit"
+                name="action"
+                value="remove"
+                class="queue__remove icon icon-trash"
+                form="person1"
+              ></button>
+            </span>
+          </td>
+        </tr>
+        <tr class="table__row">
+          <td class="table__td table__cell">2</td>
+          <td class="table__td table__cell">Person B</td>
+          <td class="table__td table__cell">
+            <span class="table__controls">
+              <button
+                type="submit"
+                name="action"
+                value="toggleStatus"
+                form="person2"
+                class="queue__status icon icon-checkmark"
+              ></button>
+            </span>
+          </td>
+          <td class="table__td table__cell">
+            <span class="table__controls">
+              <button
+                type="submit"
+                name="action"
+                value="remove"
+                class="queue__remove icon icon-trash"
+                form="person2"
+              ></button>
+            </span>
+          </td>
+        </tr>
+        <tr class="table__row">
+          <td class="table__td table__cell"></td>
+          <td class="table__td table__cell">
+            <span class="queue__single-input">
+              <input
+                name="person-name"
+                type="text"
+                class="queue__text-input input"
+                form="new_person"
+              />
+              <button
+                type="submit"
+                name="action"
+                value="add"
+                class="queue__add button"
+                form="new_person"
+              >
+                Add
+              </button>
+            </span>
+          </td>
+          <td class="table__td table__cell"></td>
+          <td class="table__td table__cell"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

@@ -1,63 +1,63 @@
 @import "../../style/constants.scss";
 
 .upload-form {
-	display: flex;
-	flex: 0 0 100px;
-	overflow-y: hidden;
-	align-items: flex-start;
-	gap: 10px;
-	padding: 15px;
-	border-radius: 10px;
-	background-color: darken($background-color, 4%);
-	margin-bottom: 20px;
+    display: flex;
+    flex: 0 0 100px;
+    overflow-y: hidden;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 15px;
+    border-radius: 10px;
+    background-color: darken($background-color, 4%);
+    margin-bottom: 20px;
 
-	&__control-section {
-		display: flex;
-		flex-direction: column;
-		flex: 0 0 150px;
-		gap: 10px;
-	}
+    &__control-section {
+        display: flex;
+        flex-direction: column;
+        flex: 0 0 150px;
+        gap: 10px;
+    }
 
-	&__input-file {
-		position: absolute;
-		width: 1px;
-		height: 1px;
-		padding: 0;
-		margin: -1px;
-		overflow: hidden;
-		clip: rect(0, 0, 0, 0);
+    &__input-file {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
 
-		&:hover~.form__upload-file-button,
-		&:focus~.form__upload-file-button {
-			background-color: $primary-color;
-		}
-	}
+        &:hover ~ .form__upload-file-button,
+        &:focus ~ .form__upload-file-button {
+            background-color: $primary-color;
+        }
+    }
 
-	&__upload-file-button {
-		text-align: center;
-	}
+    &__upload-file-button {
+        text-align: center;
+    }
 
-	&__files-to-upload {
-		display: flex;
-		overflow-y: scroll;
-		flex-wrap: wrap;
-		height: 100%;
-		gap: 4px;
-		font-size: 0.85rem;
-		font-weight: 500;
-		color: lighten($base-color, 20%);
-	}
+    &__files-to-upload {
+        display: flex;
+        overflow-y: scroll;
+        flex-wrap: wrap;
+        height: 100%;
+        gap: 4px;
+        font-size: 0.85rem;
+        font-weight: 500;
+        color: lighten($base-color, 20%);
+    }
 
-	&__file-name {
-		height: 20px;
-		padding: 4px;
-		background-color: lighten($background-color, 3%);
-		border-radius: 5px;
-	}
+    &__file-name {
+        height: 20px;
+        padding: 4px;
+        background-color: lighten($background-color, 3%);
+        border-radius: 5px;
+    }
 
-	&__submit-button {}
+    &__submit-button {}
 
-	& .button {
-		padding: 7px 10px;
-	}
+    & .button {
+        padding: 7px 10px;
+    }
 }

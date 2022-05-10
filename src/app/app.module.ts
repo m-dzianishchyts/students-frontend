@@ -15,9 +15,9 @@ import { UploadFormComponent } from './upload-form/upload-form.component';
 import { FileComponent } from './file/file.component';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, FooterComponent, PageAboutComponent, MainComponent, PageErrorComponent, PageQueueComponent, TitleComponent, PageArchiveComponent, UploadFormComponent, FileComponent],
-  imports: [BrowserModule, AppRoutingModule],
-  providers: [],
-  bootstrap: [AppComponent],
+    declarations: [AppComponent, HeaderComponent, FooterComponent, PageAboutComponent, MainComponent, PageErrorComponent, PageQueueComponent, TitleComponent, PageArchiveComponent, UploadFormComponent, FileComponent],
+    imports: [BrowserModule, AppRoutingModule],
+    providers: [],
+    bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

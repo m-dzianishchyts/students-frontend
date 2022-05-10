@@ -1,62 +1,62 @@
 @import "../../style/constants.scss";
 
 .header {
-	display: flex;
-	justify-content: space-between;
-	flex: 0 0 auto;
-	height: 50px;
-	font-size: 1.2rem;
-	font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    flex: 0 0 auto;
+    height: 50px;
+    font-size: 1.2rem;
+    font-weight: bold;
 
-	.logo {
-		height: 70%;
+    .logo {
+        height: 70%;
 
-		&__wrapper {
-			display: flex;
-			align-items: center;
-			height: 100%;
-			margin-right: 30px;
-			transition: 0.3s;
-			opacity: 0.9;
+        &__wrapper {
+            display: flex;
+            align-items: center;
+            height: 100%;
+            margin-right: 30px;
+            transition: 0.3s;
+            opacity: 0.9;
 
-			&:hover,
-			&:focus {
-				opacity: 0.8;
-			}
-		}
-	}
+            &:hover,
+            &:focus {
+                opacity: 0.8;
+            }
+        }
+    }
 }
 
 .navigation {
-	display: flex;
+    display: flex;
 
-	&__container {
-		display: flex;
-		flex: 1 0;
-		justify-content: space-between;
-	}
+    &__container {
+        display: flex;
+        flex: 1 0;
+        justify-content: space-between;
+    }
 
-	&__item {
-		padding: 15px 15px;
-		border: 0px solid $primary-color;
-		color: inherit;
-		transition: border 0.2s, background 0.3s;
+    &__item {
+        padding: 15px 15px;
+        border: 0px solid $primary-color;
+        color: inherit;
+        transition: border 0.2s, background 0.3s;
 
-		&:hover,
-		&:focus {
-			background-color: lighten($background-color, 10%);
-			border-bottom-width: 4px;
-			cursor: pointer;
-		}
-	}
+        &:hover,
+        &:focus {
+            background-color: lighten($background-color, 10%);
+            border-bottom-width: 4px;
+            cursor: pointer;
+        }
+    }
 }
 
 .sign-in,
 .sign-up {
 
-	&:hover,
-	&:focus {
-		background-color: $secondary-color;
-		color: $white-color;
-	}
+    &:hover,
+    &:focus {
+        background-color: $secondary-color;
+        color: $white-color;
+    }
 }

@@ -1,66 +1,66 @@
 ::-webkit-scrollbar {
-	width: 0;
-	background: transparent;
+    width: 0;
+    background: transparent;
 }
 
 html {
-	font: 14px Roboto;
+    font: 14px Roboto;
 }
 
 body {
-	font: inherit;
-	background-color: $background-color;
-	color: $base-color;
+    font: inherit;
+    background-color: $background-color;
+    color: $base-color;
 }
 
 .wrapper {
-	display: flex;
-	flex-direction: column;
-	min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 .container {
-	display: flex;
-	flex-direction: column;
-	flex: 1 0;
+    display: flex;
+    flex-direction: column;
+    flex: 1 0;
 
-	>app-main {
-		display: flex;
-		flex: 1 1;
-	}
+    > app-main {
+        display: flex;
+        flex: 1 1;
+    }
 
-	>*:not(.separator) {
-		margin: 0px auto;
-		padding-left: 15px;
-		padding-right: 15px;
-	}
+    > *:not(.separator) {
+        margin: 0px auto;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
 }
 
 .separator {
-	border-bottom: 1px solid $border-color;
+    border-bottom: 1px solid $border-color;
 }
 
 .button {
-	padding: 7px 10px;
-	border-radius: 7px;
-	background-color: $secondary-color;
-	color: $white-color;
-	font-size: 1rem;
-	font-weight: bold;
-	transition: 0.3s;
+    padding: 7px 10px;
+    border-radius: 7px;
+    background-color: $secondary-color;
+    color: $white-color;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: 0.3s;
 
-	&:hover {
-		cursor: pointer;
-	}
+    &:hover {
+        cursor: pointer;
+    }
 
-	&:hover,
-	&:focus {
-		background-color: $primary-color;
-	}
+    &:hover,
+    &:focus {
+        background-color: $primary-color;
+    }
 }
 
 .input {
-	border: 1px solid darken($background-color, 10%);
-	border-radius: 5px;
-	padding: 5px;
+    border: 1px solid darken($background-color, 10%);
+    border-radius: 5px;
+    padding: 5px;
 }

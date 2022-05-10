@@ -1,4 +1,4 @@
-  <div class="title">
-    <h1 class="title__header">Welcome to Students!</h1>
-    <p class="title__subheader">Student group queues & notes</p>
-  </div>
+<div class="title">
+  <h1 class="title__header">{{ header }}</h1>
+  <p *ngIf="subheader" class="title__subheader">{{ subheader }}</p>
+</div>
