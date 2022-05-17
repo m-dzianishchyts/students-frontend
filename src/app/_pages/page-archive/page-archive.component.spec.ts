@@ -1,20 +1,19 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { FileComponent } from "./file.component";
+import { PageArchiveComponent } from "./page-archive.component";
 
-describe("FileComponent", () => {
-    let component: FileComponent;
-    let fixture: ComponentFixture<FileComponent>;
+describe("PageArchiveComponent", () => {
+    let component: PageArchiveComponent;
+    let fixture: ComponentFixture<PageArchiveComponent>;
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [FileComponent]
-        })
-            .compileComponents();
+            declarations: [PageArchiveComponent],
+        }).compileComponents();
     });
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(FileComponent);
+        fixture = TestBed.createComponent(PageArchiveComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });
