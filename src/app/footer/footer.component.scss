@@ -37,8 +37,7 @@
         opacity: 0.7;
         transition: 0.3s;
 
-        &:hover,
-        &:focus {
+        &:hover {
             color: $primary-color;
             opacity: 1;
             background-color: lighten($background-color, 10%);

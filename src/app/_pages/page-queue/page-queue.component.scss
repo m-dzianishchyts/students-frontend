@@ -1,4 +1,4 @@
-@import "../../style/constants.scss";
+@import "../../../style/constants";
 
 .queue {
     display: flex;
@@ -82,9 +82,11 @@
         width: 50%;
     }
 
-    &__shuffle {}
+    &__shuffle {
+    }
 
-    &__rotate {}
+    &__rotate {
+    }
 
     &__status {
         font-size: 1.2rem;
@@ -94,7 +96,8 @@
         font-size: 1.4rem;
     }
 
-    &__add {}
+    &__add {
+    }
 
     &__single-input {
         display: flex;
@@ -120,7 +123,8 @@
     border-collapse: separate;
     border-spacing: 0;
 
-    &__head {}
+    &__head {
+    }
 
     &__row {
         &:nth-child(even) {
@@ -174,7 +178,8 @@
         overflow-y: scroll;
     }
 
-    &__td {}
+    &__td {
+    }
 
     &__controls {
         display: flex;
@@ -207,7 +212,8 @@
         }
     }
 
-    &__item {}
+    &__item {
+    }
 
     & .button {
         min-width: 100px;
