@@ -1,0 +1,47 @@
+.dialog {
+
+    &__title {
+        text-align: center;
+    }
+
+    &__content {
+    }
+
+    &__error {
+        display: inline-block;
+        text-align: center;
+    }
+}
+
+.form {
+    width: 400px;
+
+    &__container {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    &__name-section,
+    &__password-section {
+        display: flex;
+        gap: 30px;
+    }
+
+    &__password-section {
+        margin-bottom: 10px;
+    }
+
+    &__field,
+    &__submit {
+        width: 100%;
+    }
+}
+
+mat-error {
+    display: none;
+
+    &:first-child {
+        display: block;
+    }
+}

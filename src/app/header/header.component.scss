@@ -19,8 +19,7 @@
             transition: 0.3s;
             opacity: 0.9;
 
-            &:hover,
-            &:focus {
+            &:hover {
                 opacity: 0.8;
             }
         }
@@ -38,24 +37,42 @@
 
     &__item {
         padding: 15px 15px;
-        border: 0px solid $primary-color;
+        font-weight: bold;
+        font-size: inherit;
+        background-color: inherit;
         color: inherit;
+        border: 0 solid $primary-color;
         transition: border 0.2s, background 0.3s;
 
-        &:hover,
-        &:focus {
+        &:hover {
+            cursor: pointer;
             background-color: lighten($background-color, 10%);
             border-bottom-width: 4px;
-            cursor: pointer;
         }
+    }
+}
+
+.user-menu {
+
+    &__button {
+        display: flex;
+        align-items: center;
+        height: 100%;
+        padding: 15px 15px;
+        font-weight: bold;
+        font-size: inherit;
+        background-color: inherit;
+        color: inherit;
+    }
+
+    &__dropdown {
+        right: 0;
     }
 }
 
 .sign-in,
 .sign-up {
-
-    &:hover,
-    &:focus {
+    &:hover {
         background-color: $secondary-color;
         color: $white-color;
     }

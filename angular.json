@@ -81,6 +81,9 @@
                             "browserTarget": "students:build:development"
                         }
                     },
+                    "options": {
+                        "port": 80
+                    },
                     "defaultConfiguration": "development"
                 },
                 "extract-i18n": {

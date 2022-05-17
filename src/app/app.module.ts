@@ -31,6 +31,9 @@ import { PageQueueComponent } from "./_pages/page-queue/page-queue.component";
 import { PageArchiveComponent } from "./_pages/page-archive/page-archive.component";
 import { PageGroupsComponent } from "./_pages/page-groups/page-groups.component";
 import { PageUserProfileComponent } from "./_pages/page-user-profile/page-user-profile.component";
+import { SignUpDialogComponent } from "./sign-up-dialog/sign-up-dialog.component";
+import { SignInDialogComponent } from "./sign-in-dialog/sign-in-dialog.component";
+import { InitialsPipe } from "./_pipes/initials/initials.pipe";
 
 @NgModule({
     declarations: [
@@ -40,13 +43,19 @@ import { PageUserProfileComponent } from "./_pages/page-user-profile/page-user-p
         MainComponent,
 
         TitleComponent,
+
         UploadFormComponent,
+        SignUpDialogComponent,
+        SignInDialogComponent,
+
         PageAboutComponent,
         PageErrorComponent,
         PageQueueComponent,
         PageArchiveComponent,
         PageGroupsComponent,
+        PageGroupComponent,
         PageUserProfileComponent,
+        InitialsPipe,
     ],
     imports: [
         BrowserModule,

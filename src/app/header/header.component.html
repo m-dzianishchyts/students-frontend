@@ -1,25 +1,23 @@
 <header class="header">
-  <a href="/" class="logo__wrapper" tabindex="0">
-    <img
-      src="../../assets/img/students-logo.svg"
-      alt="Students logo"
-      class="logo"
-    />
-  </a>
-  <div class="navigation__container">
-    <nav class="navigation">
-      <a href="/profile" class="navigation__item" tabindex="0">Profile</a>
-      <a href="/queue" class="navigation__item" tabindex="0">Queue</a>
-      <a href="/archive" class="navigation__item" tabindex="0">Archive</a>
-      <a href="/about" class="navigation__item" tabindex="0">About</a>
-    </nav>
-    <nav class="navigation">
-      <a href="sign-in" class="navigation__item sign-in" tabindex="0"
-        >Sign in</a
-      >
-      <a href="sign-up" class="navigation__item sign-up" tabindex="0"
-        >Sign up</a
-      >
-    </nav>
-  </div>
+    <a routerLink="/" class="logo__wrapper" tabindex="0">
+        <img alt="Students logo" class="logo" src="../../assets/img/students-logo.svg"/>
+    </a>
+    <div class="navigation__container">
+        <nav aria-label="Menu" class="navigation">
+            <a class="navigation__item" routerLink="/profile" tabindex="0">Profile</a>
+            <a class="navigation__item" routerLink="/groups" tabindex="0">Groups</a>
+            <a class="navigation__item" routerLink="/about" tabindex="0">About</a>
+        </nav>
+        <nav aria-label="Profile" class="navigation">
+            <div *ngIf="authenticated()" class="user-menu">
+                <button mat-button [matMenuTriggerFor]="actions" class="user-menu__button">{{user?.name | initials}}</button>
+                <mat-menu #actions="matMenu" class="user-menu__dropdown">
+                    <a routerLink="/profile" mat-menu-item>Profile</a>
+                    <button mat-menu-item (click)="logout()">Quit</button>
+                </mat-menu>
+            </div>
+            <button (click)="openSignInDialog()" *ngIf="!authenticated()" class="navigation__item sign-in" tabindex="0">Sign in</button>
+            <button (click)="openSignUpDialog()" *ngIf="!authenticated()" class="navigation__item sign-up" tabindex="0">Sign up</button>
+        </nav>
+    </div>
 </header>
