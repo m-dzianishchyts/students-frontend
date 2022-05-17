@@ -12,7 +12,7 @@
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
 $students-primary: mat.define-palette(mat.$red-palette, 700, 500, 900);
-$students-accent: mat.define-palette(mat.$gray-palette, 400, 200, 600);
+$students-accent: mat.define-palette(mat.$gray-palette, 900, 700, 900);
 
 // The warn palette is optional (defaults to red).
 $students-warn: mat.define-palette(mat.$amber-palette, 600, 400, 800);
@@ -33,12 +33,3 @@ $students-theme: mat.define-light-theme(
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
 @include mat.all-component-themes($students-theme);
-
-@import "./style/constants";
-@import "./style/fonts";
-@import "./style/reset";
-@import "./style/icofont";
-
-@import "./style/base";
-@import "./style/properties";
-@import "./style/media";

@@ -1,0 +1,7 @@
+<div class="groups">
+    <mat-card *ngFor="let group of groups" class="groups__group group" routerLink="/group">
+        <mat-card-title class="group__name">{{ group.name }}</mat-card-title>
+        <mat-card-subtitle>Members: {{ group.members.length }}</mat-card-subtitle>
+        <mat-card-footer>Created at {{ group.createdAt | date }}</mat-card-footer>
+    </mat-card>
+</div>

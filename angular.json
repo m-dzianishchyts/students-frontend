@@ -31,6 +31,9 @@
                             "src/assets"
                         ],
                         "styles": [
+                            {
+                                "input": "src/style/theme.scss"
+                            },
                             "src/styles.scss"
                         ],
                         "scripts": []
