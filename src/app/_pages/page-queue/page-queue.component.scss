@@ -1,221 +1,91 @@
-@import "../../../style/constants";
+@import "../../../style/theme";
 
-.queue {
+:host {
     display: flex;
     flex-direction: column;
-    flex: 1 1;
+    flex: 1 0;
+}
 
-    &__container {
+.queue {
+    &__wrapper {
         display: flex;
-        justify-content: space-between;
+        flex-direction: column;
+        flex: 1 0;
         gap: 20px;
     }
 
-    & form#edit {
-        z-index: 2;
+    &__content {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        flex: 0 0 70%;
+    }
+
+    &__control {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
     }
 
     &__table {
-        position: relative;
         width: 100%;
-    }
-
-    & .table {
-        &__cell {
-            &:first-child {
-                width: 0%;
-            }
-
-            &:nth-child(2) {
-                width: 40%;
-            }
-
-            &:nth-child(3) {
-                width: 30%;
-            }
-
-            &:nth-child(4) {
-                width: 10%;
-            }
-        }
-    }
-
-    &__menu {
-
-        &--top,
-        &--bottom {
-            border-radius: 15px;
-            background-color: darken($background-color, 5%);
-        }
-
-        &--top {
-            padding: 15px 15px 50px 15px;
-            margin-bottom: -40px;
-        }
-
-        &--bottom {
-            display: flex;
-            justify-content: flex-end;
-            padding: 50px 0px 15px 15px;
-            margin-top: -40px;
-
-            & > .menu__container {
-                width: 20%;
-                justify-content: center;
-            }
-        }
-    }
-
-    &__status,
-    &__remove {
-        background-color: inherit;
-        transition: color 0.3s;
-        color: $light-color;
-
-        &:hover,
-        &:focus {
-            color: $primary-color;
-        }
-    }
-
-    &__text-input {
-        width: 50%;
-    }
-
-    &__shuffle {
-    }
-
-    &__rotate {
-    }
-
-    &__status {
-        font-size: 1.2rem;
-    }
-
-    &__remove {
-        font-size: 1.4rem;
-    }
-
-    &__add {
-    }
-
-    &__single-input {
-        display: flex;
-        max-width: 70%;
-        overflow: hidden;
-
-        & > * {
-            border-radius: 0;
-        }
-
-        & > .input {
-            flex: 1 1;
-            border-radius: 5px 0px 0px 5px;
-        }
-
-        & > .button {
-            border-radius: 0px 5px 5px 0px;
-        }
+        background-color: map-get(map-get($students-theme, background), card);
     }
 }
 
 .table {
-    border-collapse: separate;
-    border-spacing: 0;
 
-    &__head {
+    &__wrapper {
     }
 
-    &__row {
-        &:nth-child(even) {
-            background-color: darken($background-color, 3%);
-        }
-
-        &:nth-child(odd) {
-            background-color: lighten($background-color, 3%);
-        }
-
-        &:last-child .table__td {
-            border-bottom: $table-border-width solid $border-color;
-
-            &:first-child {
-                border-radius: 0px 0px 0px $table-border-radius;
-            }
-
-            &:last-child {
-                border-radius: 0px 0px $table-border-radius 0px;
-            }
-        }
+    & .mat-row .mat-cell {
+        border-bottom: 1px solid transparent;
+        border-top: 1px solid transparent;
+        cursor: pointer;
     }
 
-    &__th {
-        background-color: $primary-color;
-        color: $white-color;
-        border-top: $table-border-width solid $border-color;
-
-        &:first-child {
-            border-radius: $table-border-radius 0px 0px 0px;
-        }
-
-        &:last-child {
-            border-radius: 0px $table-border-radius 0px 0px;
-        }
+    & .mat-row:hover .mat-cell {
+        border-color: currentColor;
     }
 
-    &__cell {
-        padding: 7px;
-
-        &:first-child {
-            border-left: $table-border-width solid $border-color;
-        }
-
-        &:last-child {
-            border-right: $table-border-width solid $border-color;
-        }
+    & .selected-row {
+        font-weight: bold;
     }
 
-    &__body {
-        overflow-y: scroll;
+    & .mat-column-position {
+        width: 10%;
     }
 
-    &__td {
+    & .mat-column-name {
+        width: 65%;
     }
 
-    &__controls {
-        display: flex;
-        justify-content: center;
-        gap: 10px;
-
-        & .button {
-            color: $base-color;
-            background-color: darken($background-color, 5%);
-            opacity: 0.5;
-
-            &:hover,
-            :focus {
-                opacity: 1;
-            }
-        }
+    & .readonly-status {
+        pointer-events: none;
     }
 }
 
-.menu {
+.queue__container {
+    display: flex;
+    flex-direction: column;
+    flex: 1 0;
+    gap: 20px;
+}
 
-    &__container {
-        display: flex;
-        gap: 10px;
+.queue {
 
-        & form#shuffle-rotate {
-            display: flex;
-            width: 100%;
-            gap: inherit;
+    &__item {
+        &:hover {
+            cursor: pointer;
         }
     }
 
-    &__item {
+    &__name {
+        font-size: 1.2rem;
     }
+}
 
-    & .button {
-        min-width: 100px;
+.group {
+    &__name {
     }
 }

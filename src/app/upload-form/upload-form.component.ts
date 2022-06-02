@@ -6,11 +6,9 @@ import { Component, OnInit } from "@angular/core";
     styleUrls: ["./upload-form.component.scss"],
 })
 export class UploadFormComponent implements OnInit {
-    constructor() {
-    }
+    constructor() {}
 
-    ngOnInit(): void {
-    }
+    ngOnInit(): void {}
 
     public showFiles(event: Event) {
         const element = event.currentTarget as HTMLInputElement;

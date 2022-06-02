@@ -1,100 +1,64 @@
-<app-title></app-title>
-<div class="queue__container">
-    <div class="queue">
-        <div class="queue__menu--top menu">
-            <div class="menu__container">
-                <form id="shuffle-rotate" method="get">
-                    <input form="shuffle-rotate" name="queueId" type="hidden" value="123"/>
-                    <button class="menu__item queue__shuffle button" name="action" type="submit" value="shuffle">Shuffle</button>
-                    <button class="menu__item queue__rotate button" name="action" type="submit" value="rotate">Rotate</button>
-                </form>
-            </div>
-        </div>
-        <form id="person1" method="get">
-            <input form="person1" name="queueId" type="hidden" value="123"/>
-            <input form="person1" name="id" type="hidden" value="abc123"/>
-        </form>
-        <form id="person2" method="get">
-            <input form="person2" name="queueId" type="hidden" value="123"/>
-            <input form="person2" name="id" type="hidden" value="abc123"/>
-        </form>
-        <form id="new-person" method="post">
-            <input form="new-person" name="queueId" type="hidden" value="123"/>
-        </form>
-        <table class="queue__table table">
-            <thead class="table__head">
-            <tr class="table__row">
-                <th class="table__th table__cell">#</th>
-                <th class="table__th table__cell">Name</th>
-                <th class="table__th table__cell">Status</th>
-                <th class="table__th table__cell"></th>
-            </tr>
-            </thead>
-            <tbody class="table__body">
-            <tr class="table__row">
-                <td class="table__td table__cell">1</td>
-                <td class="table__td table__cell">Person A</td>
-                <td class="table__td table__cell">
-                        <span class="table__controls">
-                            <button
-                                class="queue__status icon icon-time"
-                                form="person1"
-                                name="action"
-                                type="submit"
-                                value="toggleStatus"
-                            ></button>
-                        </span>
+<app-title *ngIf="queue" header="{{queue?.name}}"></app-title>
+<div class="queue__wrapper">
+    <section class="queue__control">
+        <button (click)="backToGroup()" mat-stroked-button>
+            <mat-icon>arrow_back</mat-icon>
+        </button>
+        <button (click)="rotate()" color="accent" mat-flat-button>Rotate</button>
+        <button (click)="shuffle()" [disabled]="!isCreator()" color="accent" mat-flat-button>Shuffle</button>
+        <button (click)="showAddMemberDialog()" mat-stroked-button>Add</button>
+        <button (click)="showRemoveMemberConfirmationDialog()" [disabled]="!isCreator() || !selectedUser" mat-stroked-button>Remove</button>
+    </section>
+    <section class="table__wrapper">
+        <table [dataSource]="queue?.members ?? []" class="table queue__table mat-elevation-z1" mat-table>
+
+            <!-- Index column -->
+            <ng-container matColumnDef="position">
+                <th *matHeaderCellDef mat-header-cell>#</th>
+                <td *matCellDef="let i = index" mat-cell>{{ i + 1}}</td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+                <th *matHeaderCellDef mat-header-cell>Name</th>
+                <td *matCellDef="let member" mat-cell>{{ member.name.first }} {{member.name.last}}</td>
+            </ng-container>
+
+            <!-- Status column -->
+            <ng-container matColumnDef="status">
+                <th *matHeaderCellDef mat-header-cell>Status</th>
+                <td *matCellDef="let member" mat-cell>
+                    <ng-container *ngTemplateOutlet="isCreator() ? editableStatus : readonlyStatus, context: { member: member }">
+                    </ng-container>
                 </td>
-                <td class="table__td table__cell">
-                        <span class="table__controls">
-                            <button
-                                class="queue__remove icon icon-trash"
-                                form="person1"
-                                name="action"
-                                type="submit"
-                                value="remove"
-                            ></button>
-                        </span>
-                </td>
-            </tr>
-            <tr class="table__row">
-                <td class="table__td table__cell">2</td>
-                <td class="table__td table__cell">Person B</td>
-                <td class="table__td table__cell">
-                        <span class="table__controls">
-                            <button
-                                class="queue__status icon icon-checkmark"
-                                form="person2"
-                                name="action"
-                                type="submit"
-                                value="toggleStatus"
-                            ></button>
-                        </span>
-                </td>
-                <td class="table__td table__cell">
-                        <span class="table__controls">
-                            <button
-                                class="queue__remove icon icon-trash"
-                                form="person2"
-                                name="action"
-                                type="submit"
-                                value="remove"
-                            ></button>
-                        </span>
-                </td>
-            </tr>
-            <tr class="table__row">
-                <td class="table__td table__cell"></td>
-                <td class="table__td table__cell">
-                        <span class="queue__single-input">
-                            <input class="queue__text-input input" name="person-name" type="text"/>
-                            <button class="queue__add button" name="action" type="submit" value="add">Add</button>
-                        </span>
-                </td>
-                <td class="table__td table__cell"></td>
-                <td class="table__td table__cell"></td>
-            </tr>
-            </tbody>
+            </ng-container>
+
+            <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+            <tr (click)="select(member)"
+                *matRowDef="let member; columns: displayedColumns" [class.selected-row]="isSelected(member)"
+                mat-row></tr>
         </table>
-    </div>
+    </section>
+    <div class="spacer"></div>
+    <section class="queue__danger">
+        <button mat-stroked-button *ngIf="isCreator()" (click)="showDeleteQueueConfirmationDialog()" color="warn">Delete queue</button>
+        <button mat-stroked-button *ngIf="!isCreator()" (click)="showLeaveQueueConfirmationDialog()" color="warn">Leave queue</button>
+    </section>
 </div>
+
+<ng-template #editableStatus let-member="member">
+    <button (click)="setMemberStatus($event, member.id, !member.status)" color="primary" mat-icon-button>
+        <ng-container *ngTemplateOutlet="statusIcon, context: { member: member }"></ng-container>
+    </button>
+</ng-template>
+
+<ng-template #readonlyStatus let-member="member">
+    <button class="readonly-status" color="primary" mat-icon-button>
+        <ng-container *ngTemplateOutlet="statusIcon, context: { member: member }"></ng-container>
+    </button>
+</ng-template>
+
+<ng-template #statusIcon let-member="member">
+    <mat-icon *ngIf="member.status">done_icon</mat-icon>
+    <mat-icon *ngIf="!member.status">hourglass_empty_icon</mat-icon>
+</ng-template>

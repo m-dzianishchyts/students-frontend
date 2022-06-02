@@ -1,0 +1,29 @@
+<ng-container [ngSwitch]="groupUsersNotInQueue()?.length">
+    <ng-container *ngSwitchCase="undefined">
+        <mat-spinner color="primary"></mat-spinner>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="0">
+        <div mat-dialog-content>All users from the group are already in this queue.</div>
+        <div mat-dialog-actions>
+            <button mat-button [matDialogClose]="null">Ok</button>
+        </div>
+    </ng-container>
+
+    <ng-container *ngSwitchDefault>
+        <h1 mat-dialog-title>Add member</h1>
+        <div mat-dialog-content>
+            <p>Please select a group member to be added to the queue:</p>
+            <mat-form-field appearance="fill">
+                <mat-label>Group member</mat-label>
+                <mat-select [(ngModel)]="selectedUser" name="food">
+                    <mat-option *ngFor="let user of groupUsersNotInQueue()" [value]="user">{{ nameAndEmail(user) }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div mat-dialog-actions>
+            <button mat-button [matDialogClose]="null">Cancel</button>
+            <button [disabled]="!selectedUser" [matDialogClose]="selectedUser" mat-button>Ok</button>
+        </div>
+    </ng-container>
+</ng-container>

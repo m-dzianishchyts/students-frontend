@@ -6,9 +6,7 @@ import { Component, OnInit } from "@angular/core";
     styleUrls: ["./page-archive.component.scss"],
 })
 export class PageArchiveComponent implements OnInit {
-    constructor() {
-    }
+    constructor() {}
 
-    ngOnInit(): void {
-    }
+    ngOnInit(): void {}
 }

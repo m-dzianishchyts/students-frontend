@@ -36,6 +36,7 @@
     }
 
     &__item {
+        height: 100%;
         padding: 15px 15px;
         font-weight: bold;
         font-size: inherit;
@@ -44,7 +45,7 @@
         border: 0 solid $primary-color;
         transition: border 0.2s, background 0.3s;
 
-        &:hover {
+        &:hover, &.active {
             cursor: pointer;
             background-color: lighten($background-color, 10%);
             border-bottom-width: 4px;
@@ -55,14 +56,10 @@
 .user-menu {
 
     &__button {
-        display: flex;
-        align-items: center;
-        height: 100%;
-        padding: 15px 15px;
-        font-weight: bold;
-        font-size: inherit;
-        background-color: inherit;
-        color: inherit;
+        &:hover, &.active {
+            background-color: $secondary-color;
+            color: $white-color;
+        }
     }
 
     &__dropdown {

@@ -1,0 +1,11 @@
+<h1 mat-dialog-title>Add user to group</h1>
+<div mat-dialog-content>
+    <mat-form-field appearance="outline">
+        <mat-label>User email</mat-label>
+        <input matInput type="email" [(ngModel)]="email" required>
+    </mat-form-field>
+</div>
+<div mat-dialog-actions>
+    <button mat-button [mat-dialog-close]="null">Cancel</button>
+    <button mat-button [mat-dialog-close]="email" [disabled]="email.length == 0" >Add</button>
+</div>

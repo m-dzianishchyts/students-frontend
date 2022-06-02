@@ -1,7 +1,13 @@
-<div class="groups">
-    <mat-card *ngFor="let group of groups" class="groups__group group" routerLink="/group">
-        <mat-card-title class="group__name">{{ group.name }}</mat-card-title>
-        <mat-card-subtitle>Members: {{ group.members.length }}</mat-card-subtitle>
-        <mat-card-footer>Created at {{ group.createdAt | date }}</mat-card-footer>
-    </mat-card>
+<div class="groups__wrapper">
+    <section class="groups__control">
+        <button (click)="showCreateGroupDialog()" mat-stroked-button>Create queue</button>
+    </section>
+    <section class="groups__container">
+        <mat-card *ngFor="let group of userGroups" [routerLink]="['/group', group.id]" class="groups__group group">
+            <div class="group__info">
+                <mat-card-title class="group__name">{{ group.name }}</mat-card-title>
+                <mat-card-subtitle class="group__members">Members: {{ group.members.length }}</mat-card-subtitle>
+            </div>
+        </mat-card>
+    </section>
 </div>

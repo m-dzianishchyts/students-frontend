@@ -1,0 +1,93 @@
+@import "../../../style/theme";
+
+:host {
+    display: flex;
+    flex-direction: column;
+    flex: 1 0;
+}
+
+.group {
+    &__wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        flex: 1 0;
+    }
+
+    &__main {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+    }
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        flex: 0 0 70%;
+    }
+
+    &__control {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+    }
+
+    &__table {
+        width: 100%;
+        background-color: map-get(map-get($students-theme, background), card);
+
+        & .mat-row .mat-cell {
+            border-bottom: 1px solid transparent;
+            border-top: 1px solid transparent;
+            cursor: pointer;
+        }
+
+        & .mat-row:hover .mat-cell {
+            border-color: currentColor;
+        }
+
+        & .selected-row {
+            font-weight: bold;
+        }
+    }
+}
+
+.table {
+
+    &__wrapper {
+    }
+}
+
+.queue__container {
+    display: flex;
+    flex-direction: column;
+    flex: 1 0;
+    gap: 20px;
+}
+
+.queue {
+
+    &__control {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    &__item {
+        &:not(.disabled) {
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+
+    &__name {
+        font-size: 1.2rem;
+    }
+}
+
+.group {
+    &__name {
+    }
+}

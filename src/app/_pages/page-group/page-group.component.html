@@ -1,0 +1,93 @@
+<ng-container *ngTemplateOutlet="isGroupLoaded() ? groupLoaded : groupLoading"></ng-container>
+
+<ng-template #groupLoaded>
+    <app-title *ngIf="group()" header="{{ group()?.name }}"></app-title>
+    <div class="group__wrapper">
+        <div class="group__main">
+            <div class="group__content">
+                <section class="group__control">
+                    <button (click)="backToGroups()" mat-stroked-button>
+                        <mat-icon>arrow_back</mat-icon>
+                    </button>
+                    <button color="accent" mat-flat-button>Archive</button>
+                    <button (click)="showAddMemberDialog()" mat-stroked-button>Add</button>
+                    <button (click)="showRemoveMemberConfirmationDialog()" [disabled]="!selectedUser" mat-stroked-button>Remove</button>
+                </section>
+                <section class="table__wrapper">
+                    <table [dataSource]="getGroupUsers()" class="table group__table mat-elevation-z1" mat-table>
+                        <!-- Index column -->
+                        <ng-container matColumnDef="position">
+                            <th *matHeaderCellDef mat-header-cell>#</th>
+                            <td *matCellDef="let i = index" mat-cell>{{ i + 1}}</td>
+                        </ng-container>
+
+                        <!-- Name Column -->
+                        <ng-container matColumnDef="name">
+                            <th *matHeaderCellDef mat-header-cell>Name</th>
+                            <td *matCellDef="let user" mat-cell>{{ user.name.first }} {{user.name.last}}</td>
+                        </ng-container>
+
+                        <!-- Email column -->
+                        <ng-container matColumnDef="email">
+                            <th *matHeaderCellDef mat-header-cell>Email</th>
+                            <td *matCellDef="let user" mat-cell>{{ user.email }}</td>
+                        </ng-container>
+
+                        <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+                        <tr (click)="select(user)"
+                            *matRowDef="let user; columns: displayedColumns" [class.selected-row]="isSelected(user)"
+                            mat-row></tr>
+                    </table>
+                </section>
+            </div>
+            <section class="queue__container">
+                <section class="queue__control">
+                    <button mat-stroked-button (click)="showCreateQueueDialog()">Create queue</button>
+                </section>
+                <ng-container *ngFor="let queue of sortGroupQueues()">
+                    <ng-container
+                        *ngTemplateOutlet="belongsToQueue(queue) ? enabledGroupCard : disabledGroupCard, context: { queue: queue }">
+                    </ng-container>
+                </ng-container>
+            </section>
+        </div>
+        <div class="spacer"></div>
+        <section class="queue__danger">
+            <button mat-stroked-button *ngIf="isCreator()" (click)="showDeleteGroupConfirmationDialog()" color="warn">Delete group</button>
+            <button mat-stroked-button *ngIf="!isCreator()" (click)="showLeaveGroupConfirmationDialog()" color="warn">Leave group</button>
+        </section>
+    </div>
+</ng-template>
+
+<ng-template #groupLoading>
+    <div style="display: flex; align-items: center; justify-content: center; flex: 1 0">
+        <mat-spinner color="primary"></mat-spinner>
+    </div>
+</ng-template>
+
+<ng-template #enabledGroupCard let-queue="queue">
+    <mat-card [routerLink]="['/queue', queue.id]" class="queue__item">
+        <ng-container *ngTemplateOutlet="groupCardContent, context: { queue:queue }"></ng-container>
+    </mat-card>
+</ng-template>
+<ng-template #disabledGroupCard let-queue="queue">
+    <mat-card [routerLink]="['/queue', queue.id]" class="queue__item">
+        <ng-container *ngTemplateOutlet="groupCardContent, context: { queue:queue }"></ng-container>
+    </mat-card>
+</ng-template>
+<ng-template #groupCardContent let-queue="queue">
+    <mat-card-title-group>
+        <mat-card-title class="queue__name">{{ queue.name }}</mat-card-title>
+        <mat-card-subtitle>Members: {{ queue.size }}</mat-card-subtitle>
+        <button (click)="setStatusInQueue($event, queue, !queue.status)"
+                *ngIf="belongsToQueue(queue)"
+                color="primary" mat-icon-button>
+            <mat-icon *ngIf="queue.status else hourglass">done_icon</mat-icon>
+        </button>
+    </mat-card-title-group>
+    <mat-card-content *ngIf="belongsToQueue(queue)">Your position: {{ queue.position }}</mat-card-content>
+</ng-template>
+
+<ng-template #hourglass>
+    <mat-icon>hourglass_empty_icon</mat-icon>
+</ng-template>

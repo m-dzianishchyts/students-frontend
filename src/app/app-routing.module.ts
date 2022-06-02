@@ -6,14 +6,15 @@ import { PageErrorComponent } from "./_pages/page-error/page-error.component";
 import { PageGroupComponent } from "./_pages/page-group/page-group.component";
 import { PageGroupsComponent } from "./_pages/page-groups/page-groups.component";
 import { PageQueueComponent } from "./_pages/page-queue/page-queue.component";
+import { AuthenticationGuard } from "./_guards/authentication-guard.service";
 
 const routes: Routes = [
     { path: "", component: PageAboutComponent },
-    { path: "groups", component: PageGroupsComponent },
-    { path: "group", component: PageGroupComponent },
     { path: "about", component: PageAboutComponent },
-    { path: "queue", component: PageQueueComponent },
-    { path: "archive", component: PageArchiveComponent },
+    { path: "groups", component: PageGroupsComponent, canActivate: [AuthenticationGuard] },
+    { path: "group/:id", component: PageGroupComponent, canActivate: [AuthenticationGuard] },
+    { path: "queue/:id", component: PageQueueComponent, canActivate: [AuthenticationGuard] },
+    { path: "archive", component: PageArchiveComponent, canActivate: [AuthenticationGuard] },
     { path: "**", pathMatch: "full", component: PageErrorComponent },
 ];
 
@@ -21,5 +22,4 @@ const routes: Routes = [
     imports: [RouterModule.forRoot(routes)],
     exports: [RouterModule],
 })
-export class AppRoutingModule {
-}
+export class AppRoutingModule {}

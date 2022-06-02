@@ -1,23 +1,28 @@
 <header class="header">
-    <a routerLink="/" class="logo__wrapper" tabindex="0">
+    <a class="logo__wrapper" routerLink="/" tabindex="0">
         <img alt="Students logo" class="logo" src="../../assets/img/students-logo.svg"/>
     </a>
     <div class="navigation__container">
         <nav aria-label="Menu" class="navigation">
-            <a class="navigation__item" routerLink="/profile" tabindex="0">Profile</a>
-            <a class="navigation__item" routerLink="/groups" tabindex="0">Groups</a>
-            <a class="navigation__item" routerLink="/about" tabindex="0">About</a>
+            <a class="navigation__item" routerLink="/profile" routerLinkActive="active" tabindex="0">Profile</a>
+            <a class="navigation__item" routerLink="/groups" routerLinkActive="active" tabindex="0">Groups</a>
+            <a class="navigation__item" routerLink="/about" routerLinkActive="active" tabindex="0">About</a>
         </nav>
         <nav aria-label="Profile" class="navigation">
             <div *ngIf="authenticated()" class="user-menu">
-                <button mat-button [matMenuTriggerFor]="actions" class="user-menu__button">{{user?.name | initials}}</button>
-                <mat-menu #actions="matMenu" class="user-menu__dropdown">
-                    <a routerLink="/profile" mat-menu-item>Profile</a>
-                    <button mat-menu-item (click)="logout()">Quit</button>
+                <button (menuClosed)="menuOpened = false" (menuOpened)="menuOpened = true"
+                        [matMenuTriggerFor]="actions"
+                        [ngClass]="menuOpened ? 'active' : ''"
+                        class="navigation__item user-menu__button">{{ user?.name | initials}}</button>
+                <mat-menu #actions="matMenu" class="user-menu__dropdown" hasBackdrop="true" xPosition="before">
+                    <a mat-menu-item routerLink="/profile">Profile</a>
+                    <button (click)="logout()" mat-menu-item>Quit</button>
                 </mat-menu>
             </div>
-            <button (click)="openSignInDialog()" *ngIf="!authenticated()" class="navigation__item sign-in" tabindex="0">Sign in</button>
-            <button (click)="openSignUpDialog()" *ngIf="!authenticated()" class="navigation__item sign-up" tabindex="0">Sign up</button>
+            <button (click)="showSignInDialog()" *ngIf="!authenticated()" class="navigation__item sign-in" tabindex="0">Sign in
+            </button>
+            <button (click)="showSignUpDialog()" *ngIf="!authenticated()" class="navigation__item sign-up" tabindex="0">Sign up
+            </button>
         </nav>
     </div>
 </header>

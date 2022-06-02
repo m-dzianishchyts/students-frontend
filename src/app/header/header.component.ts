@@ -2,13 +2,11 @@ import { Component, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { Router } from "@angular/router";
 
-import { environment } from "../../environments/environment";
-
-import { User } from "../../_models/user";
-import { UserService } from "../../_services/user.service";
-import { SignInDialogComponent } from "../sign-in-dialog/sign-in-dialog.component";
-import { SignUpDialogComponent } from "../sign-up-dialog/sign-up-dialog.component";
-import { AuthenticationService } from "../../_services/authentication.service";
+import { User } from "../_models/user";
+import { SignInDialogComponent } from "../_dialogs/sign-in-dialog/sign-in-dialog.component";
+import { SignUpDialogComponent } from "../_dialogs/sign-up-dialog/sign-up-dialog.component";
+import { AuthenticationService } from "../_services/authentication.service";
+import { BackEndService } from "../_services/back-end.service";
 
 @Component({
     selector: "app-header",
@@ -16,47 +14,37 @@ import { AuthenticationService } from "../../_services/authentication.service";
     styleUrls: ["./header.component.scss"],
 })
 export class HeaderComponent implements OnInit {
-    user: User | null = null;
+    user?: User;
+
+    menuOpened = false;
 
     constructor(
         private dialog: MatDialog,
         private authenticationService: AuthenticationService,
-        private userService: UserService,
+        private backEndService: BackEndService,
         private router: Router
     ) {}
 
     ngOnInit(): void {
-        this.userService.userInfo.subscribe({
-            next: (user) => {
-                this.user = user;
-            },
-            error: (error) => {
-                console.error(error.constructor.name);
-                console.error(error);
-            },
-        });
+        this.backEndService.userSubject.subscribe((user) => (this.user = user));
     }
 
-    authenticated() {
+    authenticated(): boolean {
         return !!this.user;
     }
 
-    logout() {
+    logout(): void {
         this.authenticationService.logout().subscribe({
-            next: () => {
-                this.router.navigateByUrl(`${environment.apiUrl}/`);
-            },
-            error: (error) => {
-                console.error(error);
-            }
+            next: () => this.router.navigateByUrl("/"),
+            error: (error) => console.error(error),
         });
     }
 
-    openSignUpDialog() {
+    showSignUpDialog() {
         this.dialog.open(SignUpDialogComponent);
     }
 
-    openSignInDialog() {
+    showSignInDialog() {
         this.dialog.open(SignInDialogComponent);
     }
 }

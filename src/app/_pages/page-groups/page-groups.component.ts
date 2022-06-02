@@ -1,7 +1,9 @@
-import { Component, Inject, LOCALE_ID, OnInit } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
+import { MatDialog } from "@angular/material/dialog";
 
-import { Group } from "../../../_models/group";
-import { User } from "../../../_models/user";
+import { Group } from "../../_models/group";
+import { BackEndService } from "../../_services/back-end.service";
+import { CreateGroupDialogComponent, GroupInfo } from "../../_dialogs/create-group-dialog/create-group-dialog.component";
 
 @Component({
     selector: "app-page-groups",
@@ -9,20 +11,23 @@ import { User } from "../../../_models/user";
     styleUrls: ["./page-groups.component.scss"],
 })
 export class PageGroupsComponent implements OnInit {
-    groups: Group[] = [
-        new Group(
-            "Test group",
-            [
-                new User("123", "test@test.com", { first: "Sasha", last: "Beliy" }, new Date()),
-                new User("456", "test@gmail.com", { first: "Sasha", last: "Anton" }, new Date()),
-            ],
-            new Date(),
-        ),
-    ];
+    userGroups: Group[];
 
-    constructor(@Inject(LOCALE_ID) public locale: string) {
+    constructor(private dialog: MatDialog, private backEndService: BackEndService) {
+        this.userGroups = [];
     }
 
     ngOnInit(): void {
+        this.userGroups = [];
+        this.backEndService.fetchUserGroups().subscribe((userGroups) => (this.userGroups = userGroups));
+    }
+
+    showCreateGroupDialog() {
+        const dialogRef = this.dialog.open(CreateGroupDialogComponent);
+        dialogRef.afterClosed().subscribe((groupInfo: GroupInfo | null) => {
+            if (groupInfo) {
+                this.backEndService.createGroup(groupInfo).subscribe(groups => this.userGroups = groups);
+            }
+        });
     }
 }

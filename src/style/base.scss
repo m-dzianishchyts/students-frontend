@@ -36,6 +36,10 @@ body {
     }
 }
 
+.spacer {
+    flex: 1 1;
+}
+
 .separator {
     border-bottom: 1px solid $border-color;
 }
@@ -65,10 +69,12 @@ body {
     padding: 5px;
 }
 
-.mat-card-title {
-    font-size: 1.2rem;
+.disabled {
+    & * {
+        opacity: 0.8;
+    }
 }
 
-.mat-card-footer {
-    margin: 0 !important;
+.mat-dialog-actions {
+    justify-content: end;
 }

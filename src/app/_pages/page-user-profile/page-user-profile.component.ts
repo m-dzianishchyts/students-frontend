@@ -6,11 +6,7 @@ import { Component, OnInit } from "@angular/core";
     styleUrls: ["./page-user-profile.component.scss"],
 })
 export class PageUserProfileComponent implements OnInit {
+    constructor() {}
 
-    constructor() {
-    }
-
-    ngOnInit(): void {
-    }
-
+    ngOnInit(): void {}
 }

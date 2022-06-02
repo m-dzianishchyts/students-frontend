@@ -34,6 +34,7 @@
                             {
                                 "input": "src/style/theme.scss"
                             },
+                            "node_modules/material-icons/iconfont/material-icons.css",
                             "src/styles.scss"
                         ],
                         "scripts": []

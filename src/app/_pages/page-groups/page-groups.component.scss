@@ -1,18 +1,51 @@
+@import "../../../style/constants";
+
 .groups {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 20px;
+
+    &__wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    &__control {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+    }
+
+    &__container {
+        display: grid;
+        grid-template-columns: auto auto auto;
+        gap: 10px;
+    }
 
     &__group {
-        flex: 1 1;
-        width: fit-content;
-        max-width: 100%;
+        &:hover {
+            cursor: pointer;
+        }
     }
 }
 
 .group {
     &__name {
+        font-size: 1.2rem;
         white-space: nowrap;
     }
+
+    &__members {
+        margin: 0;
+    }
+
+    &__info {
+        flex: 1 0;
+    }
+
+    //&__controls {
+    //    flex: 0 0 20%;
+    //
+    //    & > mat-card-actions {
+    //        margin: 0;
+    //    }
+    //}
 }

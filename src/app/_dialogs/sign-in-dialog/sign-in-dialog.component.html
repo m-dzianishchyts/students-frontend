@@ -1,0 +1,24 @@
+<h1 class="dialog__title" mat-dialog-title>Students</h1>
+<div class="dialog__content" mat-dialog-content>
+    <form (ngSubmit)="onSubmit()" [formGroup]="signInForm" class="form__container">
+        <mat-form-field appearance="outline" class="form__field" color="primary">
+            <mat-label>Email</mat-label>
+            <input autocomplete="email" formControlName="email" matInput placeholder="email@example.com" required type="email"/>
+            <mat-error *ngIf="controls['email'].errors?.['required']">Email is required</mat-error>
+            <mat-error *ngIf="controls['email'].errors?.['email']">Invalid email</mat-error>
+            <mat-error *ngIf="controls['email'].errors?.['maxLength']">Too long</mat-error>
+        </mat-form-field>
+        <div class="form__password-section">
+            <mat-form-field appearance="outline" class="form__field" color="primary">
+                <mat-label>Password</mat-label>
+                <input autocomplete="current-password" formControlName="password" matInput required type="password"/>
+                <mat-error *ngIf="controls['password'].errors?.['required']">Password is required</mat-error>
+                <mat-error *ngIf="controls['password'].errors?.['minLength']">Too short</mat-error>
+                <mat-error *ngIf="controls['password'].errors?.['maxLength']">Too long</mat-error>
+                <mat-error *ngIf="controls['password'].errors?.['pattern']">Must contain at least one letter and one digit</mat-error>
+            </mat-form-field>
+        </div>
+        <button [disabled]="loading || !form.valid" class="form__submit" color="primary" mat-flat-button>Sign in</button>
+        <mat-error *ngIf="!!submitError()" class="dialog__error">{{ submitError() }}</mat-error>
+    </form>
+</div>
