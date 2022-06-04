@@ -4,10 +4,10 @@
         <button (click)="backToGroup()" mat-stroked-button>
             <mat-icon>arrow_back</mat-icon>
         </button>
-        <button (click)="rotate()" color="accent" mat-flat-button>Rotate</button>
-        <button (click)="shuffle()" [disabled]="!isCreator()" color="accent" mat-flat-button>Shuffle</button>
-        <button (click)="showAddMemberDialog()" mat-stroked-button>Add</button>
-        <button (click)="showRemoveMemberConfirmationDialog()" [disabled]="!isCreator() || !selectedUser" mat-stroked-button>Remove</button>
+        <button (click)="rotate()" *ngIf="isCreator() || isMember()" color="accent" mat-flat-button>Rotate</button>
+        <button (click)="shuffle()" *ngIf="isCreator()" color="accent" mat-flat-button>Shuffle</button>
+        <button (click)="showAddMemberDialog()" *ngIf="isCreator()" mat-stroked-button>Add</button>
+        <button (click)="showRemoveMemberConfirmationDialog()" *ngIf="isCreator()" [disabled]="!selectedUser" mat-stroked-button>Remove</button>
     </section>
     <section class="table__wrapper">
         <table [dataSource]="queue?.members ?? []" class="table queue__table mat-elevation-z1" mat-table>
@@ -42,7 +42,7 @@
     <div class="spacer"></div>
     <section class="queue__danger">
         <button mat-stroked-button *ngIf="isCreator()" (click)="showDeleteQueueConfirmationDialog()" color="warn">Delete queue</button>
-        <button mat-stroked-button *ngIf="!isCreator()" (click)="showLeaveQueueConfirmationDialog()" color="warn">Leave queue</button>
+        <button mat-stroked-button *ngIf="isMember()" (click)="showLeaveQueueConfirmationDialog()" color="warn">Leave queue</button>
     </section>
 </div>
 

@@ -81,11 +81,19 @@ export class PageQueueComponent implements OnInit, OnDestroy {
         return this.selectedUser === user;
     }
 
-    isCreator(): boolean {
+    isCreator() {
         if (!this.user || !this.group) {
             return false;
         }
         return this.group.creator == this.user.id;
+    }
+
+    isMember() {
+        if (!this.user || !this.queue) {
+            return false;
+        }
+        const queueMembersIds = this.queue.members.map(user => user.id);
+        return queueMembersIds.includes(this.user.id);
     }
 
     showAddMemberDialog() {

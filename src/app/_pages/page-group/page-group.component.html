@@ -9,9 +9,9 @@
                     <button (click)="backToGroups()" mat-stroked-button>
                         <mat-icon>arrow_back</mat-icon>
                     </button>
-                    <button color="accent" mat-flat-button>Archive</button>
-                    <button (click)="showAddMemberDialog()" mat-stroked-button>Add</button>
-                    <button (click)="showRemoveMemberConfirmationDialog()" [disabled]="!selectedUser" mat-stroked-button>Remove</button>
+<!--                    <button color="accent" mat-flat-button>Archive</button>-->
+                    <button (click)="showAddMemberDialog()" *ngIf="isCreator()" mat-stroked-button>Add</button>
+                    <button (click)="showRemoveMemberConfirmationDialog()" *ngIf="isCreator()" [disabled]="!selectedUser" mat-stroked-button>Remove</button>
                 </section>
                 <section class="table__wrapper">
                     <table [dataSource]="getGroupUsers()" class="table group__table mat-elevation-z1" mat-table>
