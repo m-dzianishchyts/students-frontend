@@ -19,7 +19,12 @@
     &__container {
         display: flex;
         flex-direction: column;
+        align-items: center;
         gap: 10px;
+
+        & .link {
+            font-size: 0.9rem;
+        }
     }
 
     &__name-section,

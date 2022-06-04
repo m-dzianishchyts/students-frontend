@@ -44,5 +44,6 @@
         </div>
         <button [disabled]="loading || !form.valid" class="form__submit" color="primary" mat-flat-button>Sign up</button>
         <mat-error *ngIf="!!submitError()" class="dialog__error">{{ submitError() }}</mat-error>
+        <p (click)="switchToSignInDialog()" class="link">I already have an account</p>
     </form>
 </div>

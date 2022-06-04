@@ -1,14 +1,15 @@
 import { Component, EventEmitter, OnInit, Output } from "@angular/core";
 import { FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from "@angular/forms";
-import { MatDialogRef } from "@angular/material/dialog";
+import { HttpErrorResponse, HttpStatusCode } from "@angular/common/http";
+import { MatDialog, MatDialogRef } from "@angular/material/dialog";
 import { Router } from "@angular/router";
+import { lastValueFrom } from "rxjs";
 
 import { User } from "src/app/_models/user";
 import { AuthenticationService } from "src/app/_services/authentication.service";
 import { AuthenticationDialog } from "../authentication-dialog/authentication-dialog";
-import { HttpErrorResponse, HttpStatusCode } from "@angular/common/http";
 import { BackEndService } from "../../_services/back-end.service";
-import { lastValueFrom } from "rxjs";
+import { SignInDialogComponent } from "../sign-in-dialog/sign-in-dialog.component";
 
 interface UserRegistrationInfo {
     email: string;
@@ -36,6 +37,7 @@ export class SignUpDialogComponent extends AuthenticationDialog implements OnIni
 
     constructor(
         private dialogRef: MatDialogRef<SignUpDialogComponent>,
+        private dialog: MatDialog,
         private formBuilder: FormBuilder,
         private router: Router,
         private authenticationService: AuthenticationService,
@@ -70,7 +72,7 @@ export class SignUpDialogComponent extends AuthenticationDialog implements OnIni
             .then(() => this.backEndService.refreshUser())
             .then(() => {
                 this.dialogRef.close();
-                this.router.navigateByUrl("/profile");
+                this.router.navigateByUrl("/groups");
             })
             .catch((error) => {
                 if (error instanceof HttpErrorResponse) {
@@ -184,4 +186,9 @@ export class SignUpDialogComponent extends AuthenticationDialog implements OnIni
         console.log(`confirmPasswordControl.errors: ${JSON.stringify(confirmPasswordControl.errors)}`);
         return validationErrors;
     };
+
+    switchToSignInDialog() {
+        this.dialogRef.close();
+        this.dialog.open(SignInDialogComponent);
+    }
 }

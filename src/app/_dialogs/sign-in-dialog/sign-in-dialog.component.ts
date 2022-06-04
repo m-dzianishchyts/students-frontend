@@ -1,14 +1,15 @@
 import { Component, EventEmitter, Output } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { MatDialogRef } from "@angular/material/dialog";
+import { HttpErrorResponse, HttpStatusCode } from "@angular/common/http";
+import { MatDialog, MatDialogRef } from "@angular/material/dialog";
 import { Router } from "@angular/router";
+import { lastValueFrom } from "rxjs";
 
 import { User } from "../../_models/user";
 import { AuthenticationService } from "../../_services/authentication.service";
 import { AuthenticationDialog } from "../authentication-dialog/authentication-dialog";
-import { HttpErrorResponse, HttpStatusCode } from "@angular/common/http";
 import { BackEndService } from "../../_services/back-end.service";
-import { lastValueFrom } from "rxjs";
+import { SignUpDialogComponent } from "../sign-up-dialog/sign-up-dialog.component";
 
 @Component({
     selector: "app-sign-in-dialog",
@@ -29,6 +30,7 @@ export class SignInDialogComponent extends AuthenticationDialog {
 
     constructor(
         private dialogRef: MatDialogRef<SignInDialogComponent>,
+        private dialog: MatDialog,
         private formBuilder: FormBuilder,
         private router: Router,
         private authenticationService: AuthenticationService,
@@ -63,7 +65,7 @@ export class SignInDialogComponent extends AuthenticationDialog {
             .then(() => this.backEndService.refreshUser())
             .then(() => {
                 this.dialogRef.close();
-                this.router.navigateByUrl("/profile");
+                this.router.navigateByUrl("/groups");
             })
             .catch((error) => {
                 if (error instanceof HttpErrorResponse) {
@@ -100,5 +102,10 @@ export class SignInDialogComponent extends AuthenticationDialog {
         });
         this.signInForm.controls["email"].valueChanges.subscribe({ next: (value) => (this.userCredentials.email = value) });
         this.signInForm.controls["password"].valueChanges.subscribe({ next: (value) => (this.userCredentials.password = value) });
+    }
+
+    switchToSignUpDialog() {
+        this.dialogRef.close();
+        this.dialog.open(SignUpDialogComponent);
     }
 }

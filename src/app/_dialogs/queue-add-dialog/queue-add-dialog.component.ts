@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { MatDialogRef } from "@angular/material/dialog";
 
-import { User } from "../../_models/user";
+import { compareUsers, User } from "../../_models/user";
 import { Queue } from "../../_models/queue";
 import { BackEndService } from "../../_services/back-end.service";
 import { Subscription } from "rxjs";
@@ -37,7 +37,8 @@ export class QueueAddDialogComponent implements OnInit, OnDestroy {
             return undefined;
         }
         const queueMembersIds = this.queue.members.map((member) => member.id);
-        return this.groupUsers.filter((user) => !queueMembersIds.includes(user.id));
+        const groupUsersNotInQueue = this.groupUsers.filter((user) => !queueMembersIds.includes(user.id));
+        return groupUsersNotInQueue.sort(compareUsers);
     }
 
     nameAndEmail(user: User) {
