@@ -16,6 +16,7 @@ import { MatTableModule } from "@angular/material/table";
 import { MatListModule } from "@angular/material/list";
 import { MatSelectModule } from "@angular/material/select";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { MatSnackBarModule } from "@angular/material/snack-bar";
 
 import { CookieService } from "ngx-cookie-service";
 import { LoggerModule, NgxLoggerLevel } from "ngx-logger";
@@ -101,6 +102,7 @@ import { GroupAddDialogComponent } from './_dialogs/group-add-dialog/group-add-d
         MatListModule,
         MatSelectModule,
         MatProgressSpinnerModule,
+        MatSnackBarModule
     ],
     providers: [DatePipe, AuthenticationService, AuthenticationGuard, CookieService],
     bootstrap: [AppComponent],

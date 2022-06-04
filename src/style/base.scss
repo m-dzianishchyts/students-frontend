@@ -92,3 +92,9 @@ body {
 .mat-dialog-actions {
     justify-content: end;
 }
+
+.mat-simple-snackbar {
+    .mat-simple-snackbar-action {
+        color: map-get($primary-palette, "text");
+    }
+}

@@ -1,6 +1,7 @@
 import { ActivatedRoute, Router } from "@angular/router";
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
+import { MatSnackBar } from "@angular/material/snack-bar";
 import { NGXLogger } from "ngx-logger";
 import { Subscription } from "rxjs";
 
@@ -10,6 +11,7 @@ import { Queue } from "../../_models/queue";
 import { QueueAddDialogComponent } from "../../_dialogs/queue-add-dialog/queue-add-dialog.component";
 import { BackEndService } from "../../_services/back-end.service";
 import { ConfirmationDialogComponent } from "../../_dialogs/confirmation-dialog/confirmation-dialog.component";
+import { DefaultSnackBarConfig } from "../../_services/snack-bar.service";
 
 @Component({
     selector: "app-page-queue",
@@ -29,6 +31,7 @@ export class PageQueueComponent implements OnInit, OnDestroy {
     constructor(
         private logger: NGXLogger,
         private dialog: MatDialog,
+        private snackBar: MatSnackBar,
         private router: Router,
         private route: ActivatedRoute,
         private backEndService: BackEndService
@@ -42,7 +45,7 @@ export class PageQueueComponent implements OnInit, OnDestroy {
                 const message = !nextQueueMember
                     ? "No one is ready now."
                     : `${nextQueueMember.name.first} ${nextQueueMember.name.last} is going into action!`;
-                alert(message);
+                snackBar.open(message, "Ok", { ...DefaultSnackBarConfig, duration: 5000 });
             })
         );
     }
@@ -66,7 +69,9 @@ export class PageQueueComponent implements OnInit, OnDestroy {
     }
 
     shuffle() {
-        this.backEndService.shuffleQueue();
+        this.backEndService.shuffleQueue().subscribe(() => {
+            this.snackBar.open("The queue has been shuffled!", "Ok", DefaultSnackBarConfig);
+        });
     }
 
     select(user: User) {
@@ -92,7 +97,7 @@ export class PageQueueComponent implements OnInit, OnDestroy {
         if (!this.user || !this.queue) {
             return false;
         }
-        const queueMembersIds = this.queue.members.map(user => user.id);
+        const queueMembersIds = this.queue.members.map((user) => user.id);
         return queueMembersIds.includes(this.user.id);
     }
 
@@ -104,17 +109,28 @@ export class PageQueueComponent implements OnInit, OnDestroy {
                 if (!user) {
                     return;
                 }
-                this.backEndService.addMemberToQueue(user);
+                this.backEndService.addMemberToQueue(user).subscribe(() => {
+                    this.snackBar.open(`${user.name.first} ${user.name.last} has been added to the queue.`, "Ok", {
+                        ...DefaultSnackBarConfig,
+                    });
+                });
             });
     }
 
     showRemoveMemberConfirmationDialog() {
+        const userToRemove = this.selectedUser;
         const confirmationDialogRef = this.dialog.open(ConfirmationDialogComponent);
         confirmationDialogRef.componentInstance.title = "Warning";
-        confirmationDialogRef.componentInstance.message = `Are you sure you want to remove ${this.selectedUser?.name.first} ${this.selectedUser?.name.last} from the queue?`;
+        confirmationDialogRef.componentInstance.message = `Are you sure you want to remove ${userToRemove?.name.first} ${this.selectedUser?.name.last} from the queue?`;
         confirmationDialogRef.afterClosed().subscribe((confirmed: boolean) => {
-            if (confirmed && this.selectedUser) {
-                this.backEndService.removeMemberFromQueue(this.selectedUser.id);
+            if (confirmed && userToRemove) {
+                this.backEndService.removeMemberFromQueue(userToRemove.id).subscribe(() => {
+                    this.snackBar.open(
+                        `${userToRemove.name.first} ${userToRemove.name.last} has been removed from the queue!`,
+                        "Ok",
+                        DefaultSnackBarConfig
+                    );
+                });
             }
         });
     }
@@ -134,9 +150,13 @@ export class PageQueueComponent implements OnInit, OnDestroy {
         confirmationDialogRef.componentInstance.title = "Warning";
         confirmationDialogRef.componentInstance.message = `Are you sure you want to delete ${this.queue?.name} queue?`;
         confirmationDialogRef.afterClosed().subscribe((confirmed: boolean) => {
-            if (confirmed && this.group) {
+            if (confirmed && this.group && this.queue) {
+                const deletedQueue = this.queue;
                 const groupId = this.group.id;
-                this.backEndService.deleteQueue().subscribe(() => this.router.navigateByUrl(`/group/${groupId}`));
+                this.backEndService.deleteQueue().subscribe(() => {
+                    this.router.navigateByUrl(`/group/${groupId}`);
+                    this.snackBar.open(`'${deletedQueue.name}' queue has been deleted!`, "Ok", DefaultSnackBarConfig);
+                });
             }
         });
     }
@@ -146,9 +166,13 @@ export class PageQueueComponent implements OnInit, OnDestroy {
         confirmationDialogRef.componentInstance.title = "Warning";
         confirmationDialogRef.componentInstance.message = `Are you sure you want to leave ${this.queue?.name} queue?`;
         confirmationDialogRef.afterClosed().subscribe((confirmed: boolean) => {
-            if (confirmed && this.group) {
+            if (confirmed && this.group && this.queue) {
+                const leftQueue = this.queue;
                 const groupId = this.group.id;
-                this.backEndService.leaveQueue().subscribe(() => this.router.navigateByUrl(`/group/${groupId}`));
+                this.backEndService.leaveQueue().subscribe(() => {
+                    this.router.navigateByUrl(`/group/${groupId}`);
+                    this.snackBar.open(`You have left '${leftQueue.name}' queue!`, "Ok", DefaultSnackBarConfig);
+                });
             }
         });
     }

@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { MatDialog } from "@angular/material/dialog";
+import { MatSnackBar } from "@angular/material/snack-bar";
 import { BehaviorSubject, Subscription } from "rxjs";
 
 import { Group } from "../../_models/group";
@@ -10,6 +11,7 @@ import { BackEndService } from "../../_services/back-end.service";
 import { CreateQueueDialogComponent, QueueInfo } from "../../_dialogs/create-queue-dialog/create-queue-dialog.component";
 import { ConfirmationDialogComponent } from "../../_dialogs/confirmation-dialog/confirmation-dialog.component";
 import { GroupAddDialogComponent } from "../../_dialogs/group-add-dialog/group-add-dialog.component";
+import { DefaultSnackBarConfig } from "../../_services/snack-bar.service";
 
 @Component({
     selector: "app-page-group",
@@ -27,8 +29,13 @@ export class PageGroupComponent implements OnInit, OnDestroy {
     private user?: User;
     private subscriptions: Subscription[] = [];
 
-    constructor(private route: ActivatedRoute, private router: Router, private dialog: MatDialog, private backEndService: BackEndService) {
-        console.log("Group constructor", this.groupUsers, this.groupQueues);
+    constructor(
+        private dialog: MatDialog,
+        private snackBar: MatSnackBar,
+        private route: ActivatedRoute,
+        private router: Router,
+        private backEndService: BackEndService
+    ) {
         backEndService.groupSubject.subscribe((group) => this.groupSubject.next(group));
         this.subscriptions.push(
             this.backEndService.userSubject.subscribe((user) => (this.user = user)),
@@ -47,7 +54,6 @@ export class PageGroupComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-        console.log("Group ngOnInit", this.groupUsers, this.groupQueues);
         const groupId = this.route.snapshot.params["id"];
         if (!groupId) {
             throw new Error("Group id is not provided!");
@@ -69,12 +75,13 @@ export class PageGroupComponent implements OnInit, OnDestroy {
         return queue.position !== undefined;
     }
 
-    isCreator(): boolean {
+    isCreator(user?: User): boolean {
+        const providedUser = user ?? this.user;
         const group = this.group();
-        if (!this.user || !group) {
+        if (!providedUser || !group) {
             return false;
         }
-        return group.creator == this.user.id;
+        return group.creator == providedUser.id;
     }
 
     select(user: User) {
@@ -87,6 +94,10 @@ export class PageGroupComponent implements OnInit, OnDestroy {
 
     isSelected(user: User) {
         return this.selectedUser === user;
+    }
+
+    isCreatorSelected() {
+        return this.isCreator(this.selectedUser);
     }
 
     getGroupUsers() {
@@ -112,31 +123,39 @@ export class PageGroupComponent implements OnInit, OnDestroy {
         dialogRef.afterClosed().subscribe((queueInfo: QueueInfo | null) => {
             if (queueInfo) {
                 const groupId = this.group()?.id;
-                this.backEndService.createQueue(queueInfo, groupId);
+                this.backEndService.createQueue(queueInfo, groupId).subscribe((queue) => {
+                    this.snackBar.open(`'${queue.name}' queue has been created.`, "Ok", DefaultSnackBarConfig);
+                });
             }
         });
     }
 
     showDeleteGroupConfirmationDialog() {
-        const group = this.group();
+        const groupToDelete = this.group();
         const confirmationDialogRef = this.dialog.open(ConfirmationDialogComponent);
         confirmationDialogRef.componentInstance.title = "Warning";
-        confirmationDialogRef.componentInstance.message = `Are you sure you want to delete ${group?.name} group?`;
+        confirmationDialogRef.componentInstance.message = `Are you sure you want to delete ${groupToDelete?.name} group?`;
         confirmationDialogRef.afterClosed().subscribe((confirmed: boolean) => {
-            if (confirmed && group) {
-                this.backEndService.deleteGroup().subscribe(() => this.router.navigateByUrl(`/groups`));
+            if (confirmed && groupToDelete) {
+                this.backEndService.deleteGroup().subscribe(() => {
+                    this.snackBar.open(`'${groupToDelete.name}' group has been deleted!`, "Ok", DefaultSnackBarConfig);
+                    this.router.navigateByUrl(`/groups`);
+                });
             }
         });
     }
 
     showLeaveGroupConfirmationDialog() {
-        const group = this.group();
+        const groupToLeave = this.group();
         const confirmationDialogRef = this.dialog.open(ConfirmationDialogComponent);
         confirmationDialogRef.componentInstance.title = "Warning";
-        confirmationDialogRef.componentInstance.message = `Are you sure you want to leave ${group?.name} group?`;
+        confirmationDialogRef.componentInstance.message = `Are you sure you want to leave ${groupToLeave?.name} group?`;
         confirmationDialogRef.afterClosed().subscribe((confirmed: boolean) => {
-            if (confirmed && group) {
-                this.backEndService.leaveGroup().subscribe(() => this.router.navigateByUrl(`/groups`));
+            if (confirmed && groupToLeave) {
+                this.backEndService.leaveGroup().subscribe(() => {
+                    this.snackBar.open(`You have left '${groupToLeave.name}' group!`, "Ok", DefaultSnackBarConfig);
+                    this.router.navigateByUrl(`/groups`);
+                });
             }
         });
     }
@@ -159,7 +178,9 @@ export class PageGroupComponent implements OnInit, OnDestroy {
         const dialogRef = this.dialog.open(GroupAddDialogComponent);
         dialogRef.afterClosed().subscribe((userEmail: string | null) => {
             if (userEmail) {
-                this.backEndService.addUserToGroup(userEmail);
+                this.backEndService.addUserToGroup(userEmail).subscribe(() => {
+                    this.snackBar.open("New user has been added to the group.", "Ok", DefaultSnackBarConfig);
+                });
             }
         });
     }
@@ -169,8 +190,15 @@ export class PageGroupComponent implements OnInit, OnDestroy {
         confirmationDialogRef.componentInstance.title = "Warning";
         confirmationDialogRef.componentInstance.message = `Are you sure you want to remove ${this.selectedUser?.name.first} ${this.selectedUser?.name.last} from the group?`;
         confirmationDialogRef.afterClosed().subscribe((confirmed: boolean) => {
-            if (confirmed && this.selectedUser) {
-                this.backEndService.removeMemberFromGroup(this.selectedUser.id);
+            const userToRemove = this.selectedUser;
+            if (confirmed && userToRemove) {
+                this.backEndService.removeMemberFromGroup(userToRemove.id).subscribe(() => {
+                    this.snackBar.open(
+                        `${userToRemove.name.first} ${userToRemove.name.last} has been removed from the group!`,
+                        "Ok",
+                        DefaultSnackBarConfig
+                    );
+                });
             }
         });
     }
