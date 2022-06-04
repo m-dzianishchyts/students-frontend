@@ -31,6 +31,22 @@
         width: 100%;
         background-color: map-get(map-get($students-theme, background), card);
     }
+
+    &__item {
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    &__name {
+        font-size: 1.2rem;
+    }
+
+    &__danger {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+    }
 }
 
 .table {
@@ -70,19 +86,6 @@
     flex-direction: column;
     flex: 1 0;
     gap: 20px;
-}
-
-.queue {
-
-    &__item {
-        &:hover {
-            cursor: pointer;
-        }
-    }
-
-    &__name {
-        font-size: 1.2rem;
-    }
 }
 
 .group {

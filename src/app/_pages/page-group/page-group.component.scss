@@ -51,6 +51,12 @@
             font-weight: bold;
         }
     }
+
+    &__danger {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+    }
 }
 
 .table {

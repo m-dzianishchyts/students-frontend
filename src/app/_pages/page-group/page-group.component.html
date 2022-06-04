@@ -52,7 +52,7 @@
             </section>
         </div>
         <div class="spacer"></div>
-        <section class="queue__danger">
+        <section class="group__danger">
             <button mat-stroked-button *ngIf="isCreator()" (click)="showDeleteGroupConfirmationDialog()" color="warn">Delete group</button>
             <button mat-stroked-button *ngIf="!isCreator()" (click)="showLeaveGroupConfirmationDialog()" color="warn">Leave group</button>
         </section>
