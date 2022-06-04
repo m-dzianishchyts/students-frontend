@@ -4,7 +4,7 @@ import { MatDialog } from "@angular/material/dialog";
 import { BehaviorSubject, Subscription } from "rxjs";
 
 import { Group } from "../../_models/group";
-import { User } from "../../_models/user";
+import { compareUsers, User } from "../../_models/user";
 import { PerspectiveQueue } from "../../_models/queue";
 import { BackEndService } from "../../_services/back-end.service";
 import { CreateQueueDialogComponent, QueueInfo } from "../../_dialogs/create-queue-dialog/create-queue-dialog.component";
@@ -90,7 +90,8 @@ export class PageGroupComponent implements OnInit, OnDestroy {
     }
 
     getGroupUsers() {
-        return this.groupUsers ?? [];
+        const groupUsers = this.groupUsers ?? [];
+        return groupUsers.sort(compareUsers);
     }
 
     isGroupLoaded() {
