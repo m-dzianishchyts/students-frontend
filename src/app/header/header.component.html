@@ -4,7 +4,7 @@
     </a>
     <div class="navigation__container">
         <nav aria-label="Menu" class="navigation">
-            <a class="navigation__item" routerLink="/profile" routerLinkActive="active" tabindex="0">Profile</a>
+<!--            <a class="navigation__item" routerLink="/profile" routerLinkActive="active" tabindex="0">Profile</a>-->
             <a class="navigation__item" routerLink="/groups" routerLinkActive="active" tabindex="0">Groups</a>
             <a class="navigation__item" routerLink="/about" routerLinkActive="active" tabindex="0">About</a>
         </nav>
@@ -15,7 +15,7 @@
                         [ngClass]="menuOpened ? 'active' : ''"
                         class="navigation__item user-menu__button">{{ user?.name | initials}}</button>
                 <mat-menu #actions="matMenu" class="user-menu__dropdown" hasBackdrop="true" xPosition="before">
-                    <a mat-menu-item routerLink="/profile">Profile</a>
+<!--                    <a mat-menu-item routerLink="/profile">Profile</a>-->
                     <button (click)="logout()" mat-menu-item>Quit</button>
                 </mat-menu>
             </div>
