@@ -15,11 +15,16 @@ export class AuthenticationGuard implements CanActivate {
         route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot
     ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-        const userProvided = !!this.backEndService.userSubject.getValue();
-        if (userProvided) {
+        if (this.backEndService.userSubject.getValue()) {
             return true;
         }
-        this.dialog.open(SignInDialogComponent);
-        return false;
+        return this.backEndService
+            .refreshUser()
+            .then(() => true)
+            .catch((error) => {
+                console.log(error);
+                this.dialog.open(SignInDialogComponent);
+                return false;
+            });
     }
 }
