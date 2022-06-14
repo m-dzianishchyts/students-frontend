@@ -1,6 +1,6 @@
 <div class="groups__wrapper">
     <section class="groups__control">
-        <button (click)="showCreateGroupDialog()" mat-stroked-button>Create queue</button>
+        <button (click)="showCreateGroupDialog()" mat-stroked-button>Create group</button>
     </section>
     <section class="groups__container">
         <mat-card *ngFor="let group of userGroups" [routerLink]="['/group', group.id]" class="groups__group group">
